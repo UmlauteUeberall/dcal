@@ -1,6 +1,6 @@
 # dcal
-dcal -discordian cal version 
-with colos!
+dcal -discordian cal version <br>
+with colors!
 
 compiling:
 ```bash
