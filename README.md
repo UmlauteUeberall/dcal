@@ -1,5 +1,5 @@
 # dcal
-dcal -discordian cal version <br>
+dcal - discordian cal version <br>
 with colors!
 
 compiling:
