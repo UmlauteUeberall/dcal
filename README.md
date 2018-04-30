@@ -6,5 +6,5 @@ compiling:<br>
 >gcc dcal dcal.c
 <br>
 usage:<br>
->dcal                    short version
+>dcal                    short version<br>
 >dcal -f                 long version
