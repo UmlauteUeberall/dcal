@@ -2,7 +2,9 @@
 dcal - discordian cal version <br>
 with colors!
 
-put your holliday-file in /home/<user>\/.hollidays
+```bash
+put your holliday-file in /home/<user>/.hollidays
+```
 
 compiling:
 ```bash
