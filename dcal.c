@@ -3,6 +3,9 @@
 #include <string.h>
 
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 //#include <string.h>
 
 // acitve months are yellow
@@ -15,6 +18,8 @@
 #define HOLLIDAY_COL "\e[1;31m"
 // cusrom holliday
 #define CUSTOM_COL "\e[1;36m"
+
+char* path = "/.hollidays";
 
 struct disc_time 
 {
@@ -44,6 +49,12 @@ int main(int argc, char *argv[])
 	struct disc_time hastur;
 	int pi;
 	char* fnord = NULL;
+
+	struct passwd *pw = getpwuid(getuid());
+
+	char* tmpPath =  pw->pw_dir;
+	strcat(tmpPath,path);
+	path = tmpPath;
 
 	hastur=convert();
 
@@ -203,7 +214,7 @@ int getNumberFileEntries()
 	size_t len = 0;
 	ssize_t read;
 	
-	fp = fopen("hollidays", "r");
+	fp = fopen(path, "r");
 	if (fp == NULL)
 	{
 		return 0;
@@ -232,7 +243,7 @@ struct special_day* getSpecialDays(int _count)
 
 	specialDays = (struct special_day*) malloc(_count * sizeof(struct special_day));
 
-	fp = fopen("hollidays", "r");
+	fp = fopen(path, "r");
 	if (fp == NULL)
 	{
         	return NULL;
