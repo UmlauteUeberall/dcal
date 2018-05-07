@@ -1,3 +1,14 @@
+/*
+
+	VIVA DISCORDIA
+	parts stolen from https://github.com/bo0ts/ddate stolen from util-linux stolen from Five tons of flax. stolen from Lee H:. O:. Smith, KYTP stolen from Druel the Chaotic
+	
+	54-2-3184 YOLD
+	lct
+*/
+
+
+
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -23,10 +34,10 @@ char* path = "/.hollidays";
 
 struct disc_time 
 {
-    int season; /* 0-4 */
-    int day; /* 0-72 */
-    int yday; /* 0-365 */
-    int year; /* 3066- */
+	int season; /* 0-4 */
+	int day; /* 0-72 */
+	int yday; /* 0-365 */
+	int year; /* 3066- */
 };
 
 struct special_day
@@ -49,38 +60,38 @@ int main(int argc, char *argv[])
 	struct disc_time hastur;
 	int pi;
 	char* fnord = NULL;
-
+	
 	struct passwd *pw = getpwuid(getuid());
-
+	
 	char* tmpPath =  pw->pw_dir;
 	strcat(tmpPath,path);
 	path = tmpPath;
-
+	
 	hastur=convert();
-
+	
 	for(pi=1; pi<argc; pi++) 
 	{
 		switch(argv[pi][0]) 
 		{
 			case '+': fnord=argv[pi]+1; break;
 			case '-': 
-			    	switch(argv[pi][1]) 
+				switch(argv[pi][1]) 
 				{
-	    				case 'f':
+					case 'f':
 						printDate(&hastur,1);
 						return 0;
-	    				default: 
+					default: 
 						printf("kaputt, try 'dcal' or 'dcal -f'");
 						return 0;
-	    			}
+				}
 			default: 
 				goto thud;
-		}	
+		}
 	}
 	
 	thud:
-		printDate(&hastur,0);
-
+	printDate(&hastur,0);
+		
 	return 0;
 } 
 
@@ -90,15 +101,13 @@ void printDate(struct disc_time* _date, int _longVersion)
 	int line;
 	int weekday;
 	int day;
-	int i;
-
 	struct special_day* specialDays;
 	int specialDayCount;
 	int specialDay;
-
+	
 	specialDayCount = getNumberFileEntries();
 	specialDays = getSpecialDays(specialDayCount);
-
+	
 	if(specialDay = isSpecialDay(specialDayCount, specialDays, _date->season + 1, _date->day + 1))
 		printf("%d YOLD - %s\n", _date->year, specialDays[specialDay - 1].desc);
 	else
@@ -124,9 +133,8 @@ void printDate(struct disc_time* _date, int _longVersion)
 			case 4:
 			        printf("%sTHE AFTERMATH\e[0m\n", SEASON_COL(4));
 			        break;
-
 		}
-
+	
 	printf(NORMAL_COL);
 	
 	for(column = 0; column < (_longVersion ? 5 : 1); column++)
@@ -134,7 +142,7 @@ void printDate(struct disc_time* _date, int _longVersion)
 		printf("SM BT PD PP SO\t");
 	}
 	printf("\n");
-
+	
 	
 	for(line = 0; line < 16; line++)
 	{
@@ -142,7 +150,7 @@ void printDate(struct disc_time* _date, int _longVersion)
 		{
 			if (!_longVersion && column != _date->season)
 				continue;
-
+			
 			for(weekday = 0; weekday < 5; weekday++)
 			{
 				day = 1 + weekday + line * 5;
@@ -173,8 +181,9 @@ void printDate(struct disc_time* _date, int _longVersion)
 		printf("\n");
 	}
 	
-	for(i = 0; i < specialDayCount; i++)
-		free(specialDays[i].desc);
+	// Cleanup
+	for(column = 0; column < specialDayCount; column++)
+		free(specialDays[column].desc);
 }
 
 struct disc_time convert()
@@ -252,7 +261,7 @@ struct special_day* getSpecialDays(int _count)
 	while((read = getline(&line, &len, fp)) != -1)
 	{
 		char* currentWord;
-
+		
 		wordIndex = 0;
 		currentWord = (char*) malloc(read * sizeof(char));
 		if(!currentWord)
@@ -265,7 +274,7 @@ struct special_day* getSpecialDays(int _count)
 		{
 			currentWord[tmpWordIndex] = line[wordIndex];
 		}
-        	specialDays[counter].day = atoi(currentWord);
+		specialDays[counter].day = atoi(currentWord);
 		
 		memset(currentWord,0, read);
 		tmpWordIndex = 0;
@@ -275,7 +284,7 @@ struct special_day* getSpecialDays(int _count)
 		        currentWord[tmpWordIndex] = line[wordIndex];
 		}
 		specialDays[counter].season = atoi(currentWord);
-
+		
 		memset(currentWord, 0, read);
 		tmpWordIndex = 0;
 		wordIndex++;
@@ -284,10 +293,8 @@ struct special_day* getSpecialDays(int _count)
 		        currentWord[tmpWordIndex] = line[wordIndex];
 		}
 		specialDays[counter++].desc = currentWord;
-		//free(currentWord);
 	}
 	fclose(fp);
-
 	
 	return specialDays;
 }
