@@ -60,3 +60,12 @@ dcal -f         # long version
 # 71 72 73        68 69 70 71 72  70 71 72 73     67 68 69 70 71  69 70 71 72 73
 #                 73                              72 73
 ```
+```bash
+dcal -d 5 1         # date checker
+
+# Celebrate Mungday
+
+dcal -d 23 1
+
+# a new day and nothing has changed
+```
