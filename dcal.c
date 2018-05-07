@@ -54,6 +54,7 @@ void printDate(struct disc_time*,int);
 int getNumberFileEntries();
 struct special_day* getSpecialDays(int);
 int isSpecialDay(int,struct special_day*, int, int);
+void printSpecialDay(int,int);
 
 int main(int argc, char *argv[])
 {
@@ -80,8 +81,14 @@ int main(int argc, char *argv[])
 					case 'f':
 						printDate(&hastur,1);
 						return 0;
+					case 'd':
+						if (argc != 3 + pi)
+							printf("kaputt, try 'dcal' or 'dcal -f' or 'dcal -d <day> <month>'\n");
+						else
+							printSpecialDay(atoi(argv[pi+1]),atoi(argv[pi+2]));
+						return 0;
 					default: 
-						printf("kaputt, try 'dcal' or 'dcal -f'");
+						printf("kaputt, try 'dcal' or 'dcal -f' or 'dcal -d <day> <month>'\n");
 						return 0;
 				}
 			default: 
@@ -182,8 +189,27 @@ void printDate(struct disc_time* _date, int _longVersion)
 	}
 	
 	// Cleanup
-	for(column = 0; column < specialDayCount; column++)
-		free(specialDays[column].desc);
+	for(specialDay = 0; specialDay < specialDayCount; specialDay++)
+		free(specialDays[specialDay].desc);
+}
+
+void printSpecialDay(int _day, int _month)
+{
+	struct special_day* specialDays;
+	int specialDayCount;
+	int specialDay;
+	
+	specialDayCount = getNumberFileEntries();
+	specialDays = getSpecialDays(specialDayCount);
+	
+	if(specialDay = isSpecialDay(specialDayCount, specialDays, _month, _day))
+		printf("%s\n",  specialDays[specialDay - 1].desc);
+	else
+		printf("a new day and nothing has changed\n");
+	
+	// Cleanup
+	for(specialDay = 0; specialDay < specialDayCount; specialDay++)
+		free(specialDays[specialDay].desc);
 }
 
 struct disc_time convert()
