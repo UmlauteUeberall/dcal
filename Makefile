@@ -9,7 +9,7 @@ all: dcal.c
 install: dcal dcal.1
 	install -d $(PREFIX)/bin/
 	install -m 755 dcal $(PREFIX)/bin/
-	gzip -k dcal.1
+	gzip -c dcal.1 >> dcal.1.gz
 	install -d $(PREFIX)/share/man/man1/
 	install -m 644 dcal.1.gz $(PREFIX)/share/man/man1/	
 
