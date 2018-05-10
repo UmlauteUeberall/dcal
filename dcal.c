@@ -25,12 +25,12 @@
 #define NORMAL_COL "\e[0m"
 // inverted for active day
 #define CURRENT_COL "\e[1;7m"
-// hollidays are red
+// holydays are red
 #define HOLLIDAY_COL "\e[1;31m"
-// cusrom holliday
+// cusrom holyday
 #define CUSTOM_COL "\e[1;36m"
 
-char* path = "/.hollidays";
+char* path = "/.holydays";
 
 struct disc_time 
 {
