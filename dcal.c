@@ -26,7 +26,7 @@
 // inverted for active day
 #define CURRENT_COL "\e[1;7m"
 // holydays are red
-#define HOLLIDAY_COL "\e[1;31m"
+#define HOLYDAY_COL "\e[1;31m"
 // cusrom holyday
 #define CUSTOM_COL "\e[1;36m"
 
@@ -166,7 +166,7 @@ void printDate(struct disc_time* _date, int _longVersion)
 				if (day - 1 == _date->day && column == _date->season)
 					printf(CURRENT_COL);
 				else if (day == 5 || day == 50)
-					printf(HOLLIDAY_COL);
+					printf(HOLYDAY_COL);
 				else if (isSpecialDay(specialDayCount, specialDays, column + 1, day))
 					printf(CUSTOM_COL);
 				
@@ -328,12 +328,12 @@ struct special_day* getSpecialDays(int _count)
 int isSpecialDay(int _entryCount, struct special_day* _specialDays, int _season, int _day)
 {
 	int i;
-
+	
 	if (_entryCount == 0 || !_specialDays)
 	{
 		return 0;
 	}
-
+	
 	for(i = 0; i < _entryCount; i++)
 	{
 		if (_specialDays[i].season == _season && _specialDays[i].day == _day)
