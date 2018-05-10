@@ -1,0 +1,87 @@
+.\" Copywrong (c) 3184 lct, keios
+.\"
+.\"    DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+.\"                    Version 2, December 2004 
+.\"
+.\" Copyright (C) 2004 Sam Hocevar <sam@hocevar.net> 
+.\"
+.\" Everyone is permitted to copy and distribute verbatim or modified 
+.\" copies of this license document, and changing it is allowed as long 
+.\" as the name is changed. 
+.\"
+.\"            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+.\"   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION 
+.\"
+.\"  0. You just DO WHAT THE FUCK YOU WANT TO.
+.\"
+.\" $Chaoscult of Chaos$
+.\"
+.Dd Dsc 57, 3184
+.Dt DCAL 1
+.Os
+.Sh NAME
+.Nm dcal
+.Nd displays the discordian calendar and holydays
+.Sh SYNOPSIS
+.Nm
+.Op Fl f
+.Op Fl d Ar day month
+.Sh DESCRIPTION
+The
+.Nm
+utility displays a discordian calendar in traditional format,
+shows the current day inversed and holydays in red.
+If arguments are not specified,
+the current month is displayed.
+.Pp
+The options are as follows:
+.Bl -tag -width indent
+.It Fl f
+Displays the calendar for the full year. Fits beautifully on
+80x25 terminals.
+.It Fl d Ar day month
+Shows if a holyday falls on the specified date. The parameters must
+be given in numericals.
+.El
+.Pp
+Not all options can be used together. The options 
+.Fl f 
+and 
+.Fl d 
+are mutually exclusive. If inconsistent options are given, the first
+one takes precendence.
+Additionally,
+.Nm
+does not differenciate between options and parameters.
+.Sh ADVANCED FEATURES
+One may define one's own whollydays.
+Upon execution,
+.Nm
+searches for a file named
+.Em .holydays
+in the home directory of the invoking user. If none is present,
+.Nm
+will use the standard holydays as defined in the Principia
+Discordia. If such a file is found,
+.Nm
+will peruse the contents to highlight custom whollydays in
+turquoise. The syntax is as follows:
+.Pp
+.Bd
+day,month,description
+.Ed
+.Pp
+For example,
+.Pp
+.Bd
+72,2,Celebrate Towel Day
+.Ed
+.Sh SEE ALSO
+.Xr ddate 1 
+.Sh AUTHORS
+The
+.Nm
+command was written by lct. The manual was written by keios.
+.Sh BUGS
+fnord fnord fnord fnord fnord
+
