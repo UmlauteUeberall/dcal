@@ -16,3 +16,7 @@ install: dcal dcal.1
 clean:
 	rm dcal
 	rm dcal.1.gz
+
+uninstall:
+	rm $(PREFIX)/bin/dcal
+	rm $(PREFIX)/share/man/man1/dcal.1.gz
