@@ -52,7 +52,7 @@ struct special_day
 struct disc_time convert();
 void printDate(struct disc_time*,int);
 
-// Custom Hollidays
+// Custom Holydays
 int getNumberFileEntries();
 struct special_day* getSpecialDays(int);
 int isSpecialDay(int,struct special_day*, int, int);
