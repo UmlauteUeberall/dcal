@@ -19,7 +19,7 @@
 #include <pwd.h>
 //#include <string.h>
 
-// acitve months are yellow
+// active months are yellow
 #define SEASON_COL(x) (_date->season == x ? "\e[1;33m" : "\e[0m")
 //normal
 #define NORMAL_COL "\e[0m"
@@ -27,8 +27,10 @@
 #define CURRENT_COL "\e[1;7m"
 // holydays are red
 #define HOLYDAY_COL "\e[1;31m"
-// cusrom holyday
+// custom holyday
 #define CUSTOM_COL "\e[1;36m"
+// fnord
+#define ERROR_MSG "The answer to your question is FIVE TONS OF MAN DCAL!\n"
 
 char* path = "/.holydays";
 
@@ -83,12 +85,12 @@ int main(int argc, char *argv[])
 						return 0;
 					case 'd':
 						if (argc != 3 + pi)
-							printf("kaputt, try 'dcal' or 'dcal -f' or 'dcal -d <day> <month>'\n");
+							printf(ERROR_MSG);
 						else
 							printSpecialDay(atoi(argv[pi+1]),atoi(argv[pi+2]));
 						return 0;
 					default: 
-						printf("kaputt, try 'dcal' or 'dcal -f' or 'dcal -d <day> <month>'\n");
+						printf(ERROR_MSG);
 						return 0;
 				}
 			default: 
@@ -292,7 +294,7 @@ struct special_day* getSpecialDays(int _count)
 		currentWord = (char*) malloc(read * sizeof(char));
 		if(!currentWord)
 		{
-			printf("malloc kaputt");
+			printf("malloc has the curse of greyface");
 			return NULL;
 		}
 		memset(currentWord,0, read);
