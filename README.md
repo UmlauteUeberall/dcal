@@ -2,15 +2,18 @@
 dcal - discordian cal version <br>
 with colors!
 
-put your holyday-file in 
+installation:
+
 ```bash
-/home/<user>/.holydays
+make
+make install
+```
+set PREFIX to change target directory:
+```bash
+PREFIX=/usr/bin make
+PREFIX=/usr/bin make install
 ```
 
-compiling:
-```bash
-gcc dcal dcal.c
-```
 usage:
 
 ```bash
