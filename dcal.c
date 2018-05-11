@@ -330,12 +330,12 @@ struct special_day* getSpecialDays(int _count)
 int isSpecialDay(int _entryCount, struct special_day* _specialDays, int _season, int _day)
 {
 	int i;
-
+	
 	if (_entryCount == 0 || !_specialDays)
 	{
 		return 0;
 	}
-
+	
 	for(i = 0; i < _entryCount; i++)
 	{
 		if (_specialDays[i].season == _season && _specialDays[i].day == _day)
