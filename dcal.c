@@ -19,7 +19,7 @@
 #include <pwd.h>
 //#include <string.h>
 
-// active months are yellow
+// acitve months are yellow
 #define SEASON_COL(x) (_date->season == x ? "\e[1;33m" : "\e[0m")
 //normal
 #define NORMAL_COL "\e[0m"
@@ -27,10 +27,8 @@
 #define CURRENT_COL "\e[1;7m"
 // holydays are red
 #define HOLYDAY_COL "\e[1;31m"
-// custom holyday
+// cusrom holyday
 #define CUSTOM_COL "\e[1;36m"
-// fnord
-#define ERROR_MSG "The answer to your question is FIVE TONS OF MAN DCAL!\n"
 
 char* path = "/.holydays";
 
@@ -52,7 +50,7 @@ struct special_day
 struct disc_time convert();
 void printDate(struct disc_time*,int);
 
-// Custom Holydays
+// Custom Hollidays
 int getNumberFileEntries();
 struct special_day* getSpecialDays(int);
 int isSpecialDay(int,struct special_day*, int, int);
@@ -85,12 +83,12 @@ int main(int argc, char *argv[])
 						return 0;
 					case 'd':
 						if (argc != 3 + pi)
-							printf(ERROR_MSG);
+							printf("kaputt, try 'dcal' or 'dcal -f' or 'dcal -d <day> <month>'\n");
 						else
 							printSpecialDay(atoi(argv[pi+1]),atoi(argv[pi+2]));
 						return 0;
 					default: 
-						printf(ERROR_MSG);
+						printf("kaputt, try 'dcal' or 'dcal -f' or 'dcal -d <day> <month>'\n");
 						return 0;
 				}
 			default: 
@@ -118,7 +116,15 @@ void printDate(struct disc_time* _date, int _longVersion)
 	specialDays = getSpecialDays(specialDayCount);
 	
 	if(specialDay = isSpecialDay(specialDayCount, specialDays, _date->season + 1, _date->day + 1))
-		printf("%d YOLD - %s\n", _date->year, specialDays[specialDay - 1].desc);
+	{
+		printf("%d YOLD - ", _date->year);
+		if (_date->day + 1 == 5 || _date->day + 1 == 50)
+			printf(HOLYDAY_COL);
+		else
+			printf(CUSTOM_COL);
+		printf("%s\n", specialDays[specialDay - 1].desc);
+		printf(NORMAL_COL);
+	}
 	else
 		printf("%d YOLD\n",_date->year);
 	
@@ -294,7 +300,7 @@ struct special_day* getSpecialDays(int _count)
 		currentWord = (char*) malloc(read * sizeof(char));
 		if(!currentWord)
 		{
-			printf("malloc has the curse of greyface");
+			printf("malloc kaputt");
 			return NULL;
 		}
 		memset(currentWord,0, read);
